@@ -1,6 +1,13 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## <center>Supercharged Next.js Template</center>
 
-## Getting Started
+### What's included?
+
+- [XState](https://github.com/statelyai/xstate) for State Machines & Statecharts
+- [Mantine](https://github.com/mantinedev/mantine) UI Components & Hooks
+- Mobile Responsive [App Shell](./components/AppShell/)
+- Dark/Light Mode
+
+### Getting Started
 
 First, run the development server:
 
@@ -16,7 +23,7 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+### Learn More
 
 To learn more about Next.js, take a look at the following resources:
 
