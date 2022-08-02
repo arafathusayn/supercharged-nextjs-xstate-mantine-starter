@@ -1,5 +1,5 @@
 import { createMachine } from "xstate";
-import { AppContext, AppEvent } from "../../../types/index";
+import { AppContext, AppEvent } from "../../types/index";
 
 const appMachine = createMachine({
   id: "App",

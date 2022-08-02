@@ -6,7 +6,7 @@ import {
   ContextFrom,
   EventFrom,
 } from "xstate";
-import { COLOR_SCHEME_KEY_FOR_STORAGE } from "../../../../constants";
+import { COLOR_SCHEME_KEY_FOR_STORAGE } from "../../../constants";
 import appMachine from "../definition";
 
 type Ctx = ContextFrom<typeof appMachine>;

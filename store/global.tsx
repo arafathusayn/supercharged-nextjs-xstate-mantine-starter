@@ -1,7 +1,7 @@
 import React, { createContext } from "react";
 import { InterpreterFrom } from "xstate";
 import { useInterpret } from "@xstate/react";
-import appMachine from "../statecharts/machines/app-machine/config";
+import appMachine from "../statecharts/app-machine/config";
 
 export const GlobalStateContext = createContext({
   appService: {} as InterpreterFrom<typeof appMachine>,
