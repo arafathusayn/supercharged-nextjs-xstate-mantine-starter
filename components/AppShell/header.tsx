@@ -1,5 +1,5 @@
 import { useActor } from "@xstate/react";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import {
   Burger,
   Group,
@@ -11,7 +11,7 @@ import {
   ActionIcon,
   useMantineColorScheme,
 } from "@mantine/core";
-import { IconSun, IconMoonStars } from "@tabler/icons";
+import { IconSun, IconMoonStars } from "@tabler/icons-react";
 import { GlobalStateContext } from "../../store/global";
 
 const AppHeader = () => {
