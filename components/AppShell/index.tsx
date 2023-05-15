@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useContext, useEffect, useState } from "react";
+import { ReactNode, useCallback, useEffect, useState } from "react";
 import {
   AppShell,
   useMantineTheme,
@@ -7,12 +7,11 @@ import {
   ColorScheme,
 } from "@mantine/core";
 
-import AppNavbar from "./navbar";
-import AppFooter from "./footer";
-import AppSidebar from "./sidebar";
-import AppHeader from "./header";
-import { GlobalStateContext } from "../../store/global";
-import { useActor } from "@xstate/react";
+import { useAppActor, useAppSelector } from "@/store/global";
+import AppNavbar from "@/components/AppShell/navbar";
+import AppFooter from "@/components/AppShell/footer";
+import AppSidebar from "@/components/AppShell/sidebar";
+import AppHeader from "@/components/AppShell/header";
 
 type AppShellProps = {
   children: ReactNode;
@@ -20,12 +19,14 @@ type AppShellProps = {
 
 export default function AppShellComponent({ children }: AppShellProps) {
   const theme = useMantineTheme();
-  const [colorScheme, setColorScheme] = useState<ColorScheme>("dark");
-  const { appService } = useContext(GlobalStateContext);
-  const [state, send] = useActor(appService);
 
-  const { context } = state;
-  const { colorScheme: colorSchemeInContext } = context;
+  const [colorScheme, setColorScheme] = useState<ColorScheme>("dark");
+
+  const [, send] = useAppActor();
+
+  const colorSchemeInContext = useAppSelector(
+    (state) => state.context.colorScheme,
+  );
 
   const toggleColorScheme = useCallback(
     (value?: ColorScheme) => {

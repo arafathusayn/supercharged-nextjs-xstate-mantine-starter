@@ -1,13 +1,9 @@
-import { useContext } from "react";
 import { Navbar, Stack, Text } from "@mantine/core";
-import { GlobalStateContext } from "../../store/global";
-import { useActor } from "@xstate/react";
+
+import { useAppSelector } from "@/store/global";
 
 const AppNavbar = () => {
-  const { appService } = useContext(GlobalStateContext);
-  const [state, _send] = useActor(appService);
-  const { context } = state;
-  const { isNavOpen } = context;
+  const isNavOpen = useAppSelector((state) => state.context.isNavOpen);
 
   return (
     <Navbar

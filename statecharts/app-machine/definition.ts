@@ -1,9 +1,10 @@
 import { createMachine } from "xstate";
-import { AppContext, AppEvent } from "../../types/index";
+import { AppContext, AppEvent } from "@/types/index";
 
 const appMachine = createMachine({
   id: "App",
   strict: true,
+  predictableActionArguments: true,
   initial: "AppStarted",
   context: {} as AppContext,
   on: {

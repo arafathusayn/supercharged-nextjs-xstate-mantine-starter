@@ -1,5 +1,3 @@
-import { useActor } from "@xstate/react";
-import { useContext } from "react";
 import {
   Burger,
   Group,
@@ -12,15 +10,17 @@ import {
   useMantineColorScheme,
 } from "@mantine/core";
 import { IconSun, IconMoonStars } from "@tabler/icons-react";
-import { GlobalStateContext } from "../../store/global";
+
+import { useAppActor, useAppSelector } from "@/store/global";
 
 const AppHeader = () => {
   const theme = useMantineTheme();
+
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-  const { appService } = useContext(GlobalStateContext);
-  const [state, send] = useActor(appService);
-  const { context } = state;
-  const { isNavOpen } = context;
+
+  const [, send] = useAppActor();
+
+  const isNavOpen = useAppSelector((state) => state.context.isNavOpen);
 
   return (
     <Header height={60} p="md">
@@ -47,7 +47,7 @@ const AppHeader = () => {
         <MediaQuery largerThan="sm" styles={{ flexGrow: 1 }}>
           <Group position="center">
             <Stack spacing="xs">
-              <Text>Create Fast Next.js App</Text>
+              <Text>Supercharged Next.js App</Text>
             </Stack>
           </Group>
         </MediaQuery>
