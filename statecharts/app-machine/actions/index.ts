@@ -6,8 +6,8 @@ import {
   ContextFrom,
   EventFrom,
 } from "xstate";
-import { COLOR_SCHEME_KEY_FOR_STORAGE } from "../../../constants";
-import appMachine from "../definition";
+import { COLOR_SCHEME_KEY_FOR_STORAGE } from "@/constants";
+import appMachine from "@/statecharts/app-machine/definition";
 
 type Ctx = ContextFrom<typeof appMachine>;
 type Evt = EventFrom<typeof appMachine>;
@@ -20,34 +20,36 @@ type Action =
       meta: ActionMeta<Ctx, Evt, BaseActionObject>,
     ) => void);
 
-export const restoreColorScheme: Action = assign(() => {
-  if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
-    const colorScheme = localStorage.getItem(COLOR_SCHEME_KEY_FOR_STORAGE);
-
-    const possibleValues: Ctx["colorScheme"][] = ["dark", "light"];
-
-    if (
-      colorScheme &&
-      possibleValues.includes(colorScheme as Ctx["colorScheme"])
-    ) {
-      return {
-        colorScheme,
-      };
-    } else if (
-      typeof matchMedia !== "undefined" &&
-      !matchMedia("(prefers-color-scheme: dark)").matches
-    ) {
-      return {
-        colorScheme: "light",
-      };
-    } else {
-      return {
-        colorScheme: "dark",
-      };
-    }
+export const restoreColorScheme = assign(() => {
+  if (typeof window === "undefined" || typeof localStorage === "undefined") {
+    return {
+      colorScheme: "dark",
+    };
   }
 
-  return {};
+  const colorScheme = localStorage.getItem(COLOR_SCHEME_KEY_FOR_STORAGE);
+
+  const possibleValues: Ctx["colorScheme"][] = ["dark", "light"];
+
+  if (
+    colorScheme &&
+    possibleValues.includes(colorScheme as Ctx["colorScheme"])
+  ) {
+    return {
+      colorScheme,
+    };
+  } else if (
+    typeof matchMedia !== "undefined" &&
+    !matchMedia("(prefers-color-scheme: dark)").matches
+  ) {
+    return {
+      colorScheme: "light",
+    };
+  } else {
+    return {
+      colorScheme: "dark",
+    };
+  }
 });
 
 export const changeColorScheme: Action = assign((_context, event) => {
